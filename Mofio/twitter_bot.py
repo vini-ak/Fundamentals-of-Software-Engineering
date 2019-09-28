@@ -10,10 +10,12 @@ import datetime
 from random import randint
 
 def data_hora():
+	''' RETURNS DATE AND TIME FORMATED '''
 	data_hora = "%d/%d/%d - %d:%d" % (datetime.datetime.now().day, datetime.datetime.now().month, datetime.datetime.now().year, datetime.datetime.now().hour, datetime.datetime.now().minute)
 	return data_hora
 
 def cantar_brega():
+	''' THIS FUNCTIONS RETURNS A VERSE OF A RANDOM BREGA SONG '''
 	bregas = ['CHA-PU-LE-TEI',  'O DJ ta mt loooouco e mandou te avisar', \
 	'Passo o dia sonhando pensando em você, meu amooor', 'desça daí, seu corno, desça daíiii'\
 	'Quando acordar de manha e tomar seu café sozinha, pergunte pra sua tristeza se ela também é minhaaa :(']
@@ -21,24 +23,19 @@ def cantar_brega():
 	index = randint(0, len(bregas)-1)
 	return bregas[index]
 
-'''def treinar():
-	while True:
-		quest = input('You: ')
-		response = mofio_bot.get_response(quest)
-		print('Bot: ', response)'''
 
-
+# =================================== TOKENS ============================================= #
 CONSUMER_KEY = 'LEK3YlwVYwsr8N07VbQQta3Hx' # Consumer API key
 CONSUMER_SECRET = 'eeiJrVzN36MOEp0sBbFyQeiUTr2V3bPpBSjwWUcxnkAvfxCSft' # Consumer API secret key
 ACCESS_KEY = '1164078743381561344-0YmsHK6X72m96XhuvnFWxtnTYU59xI' # Access token
 ACCESS_SECRET = 'jqn2OkTZCqOPmPgvMiMhTm7wcLDPbYAfO91s4DVPPVzRb' # Access token secret key
+# ======================================================================================== #
 
 auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
 api = tweepy.API(auth)
 
-home = api.home_timeline()
-
+# ================================== PT BÁSICO ======================================== #
 mofio_bot = ChatBot('mofio')
 basico = ['Oi', 'Olá mundo!', \
 'Quem é você?', 'Meu nome é Mofio! Sou um bot criado por Vinícius Vieira', \
@@ -47,9 +44,10 @@ basico = ['Oi', 'Olá mundo!', \
 'Ĉanta um brega aleatorio pra mim', cantar_brega(),\
 'Que horas são?', data_hora()]
 
-# Trainer pernambucano:
-trainer_pe = ListTrainer(mofio_bot)
-trainer_pe.train(basico)
+
+TREINAR_BASICO = ListTrainer(mofio_bot)
+TREINAR_BASICO.train(basico)
+# ===================================================================================== #
 
 # English trainer
 eng_trainer = ChatterBotCorpusTrainer(mofio_bot)
